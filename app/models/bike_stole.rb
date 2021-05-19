@@ -1,0 +1,2 @@
+class BikeStole < ApplicationRecord
+end

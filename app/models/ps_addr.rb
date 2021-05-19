@@ -1,0 +1,2 @@
+class PsAddr < ApplicationRecord
+end

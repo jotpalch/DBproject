@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  'no': MyString
+  ps: MyString
+  addr: MyString
+  direction: MyString
+
+two:
+  'no': MyString
+  ps: MyString
+  addr: MyString
+  direction: MyString

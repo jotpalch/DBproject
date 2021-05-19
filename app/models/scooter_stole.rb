@@ -1,0 +1,2 @@
+class ScooterStole < ApplicationRecord
+end

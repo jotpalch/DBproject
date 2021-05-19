@@ -1,0 +1,2 @@
+class Cctv < ApplicationRecord
+end
