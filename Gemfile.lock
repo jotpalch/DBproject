@@ -170,6 +170,8 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2021.1)
       tzinfo (>= 1.0.0)
+    utf8-cleaner (1.0.0)
+      activesupport
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -207,6 +209,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
+  utf8-cleaner
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
