@@ -2,7 +2,6 @@
 
 require 'csv'
 
-PsAddr.delete_all
 CSV.foreach("temp.csv", headers: true) do |row|
   PsAddr.create(
     name: row[0],
