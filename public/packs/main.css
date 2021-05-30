@@ -1679,6 +1679,10 @@ input, select, textarea {
 
 		}
 
+		#SearchBTN{
+			margin-left: 20px;
+		}
+
 /* List */
 
 	ul {
