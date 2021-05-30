@@ -195,7 +195,7 @@
 								</table>
 
 								<ul class="pagination justify-content-center">
-									<%= paginate @bikestole , :remote => true %>
+									<%= paginate @bikestole , :params => { :anchor => 'search' } , :remote => true %>
 								</ul>
 
 
