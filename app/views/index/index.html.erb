@@ -5,7 +5,7 @@
 
 				<!-- Nav -->
 					<nav id="nav">
-						<a href="#" class="icon solid fa-home"><span>Home</span></a>
+						<a href="/index" class="icon solid fa-home"><span>Home</span></a>
 						<a href="#work" class="icon solid fa-map"><span>Map</span></a>
 						<a href="#search" class="icon solid fa-search"><span>Search</span></a>
 						<a href="https://police.gov.taipei/Default.aspx" class="icon solid fa-globe"><span>Url</span></a>
@@ -183,8 +183,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										<% c = BikeStole.first(20) %>
-										<% c.each do |p| %>
+
+										<% @bikestole.each do |p| %>
 										<tr>
 											<td><%= p.date %></td>
 											<td><%= p.time %></td>
@@ -193,6 +193,11 @@
 										<% end %>
 									</tbody>
 								</table>
+
+								<%= paginate @bikestole , remote: true %>
+
+
+
 
 
 							</article>
