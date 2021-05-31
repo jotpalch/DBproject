@@ -1,0 +1,52 @@
+
+<%= form_for :test do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+  <%= :test.to_param %>
+
+<% end %>
+
+<%= form_tag bike_stoles_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
+<% end %>
+
+<%= form_tag bike_stoles_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Enter Text..." %>
+    <%= submit_tag "Search", name: nil %>
+<% end %>
+
+  <% form_for :bike_stoles  do |f| %>
+    <div class="field">
+      <% f.label :name %><br>
+      <% f.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <% f.submit %>
+    </div>
+  <% end%>
+
+  <form action="/search" method="get" id="sb">
+    <input type="text" name="123" value="123">
+    <input type="submit" class="btn btn-dark" value="搜尋">
+  </form>
+
+  <select class="form-select" aria-label="type" name="type" id="type" form="sb">
+    <option selected>類型</option>
+    <option value="1">自行車竊盜</option>
+    <option value="2">機車竊盜</option>
+    <option value="3">汽車竊盜</option>
+    <option value="4">住宅竊盜</option>
+  </select>
