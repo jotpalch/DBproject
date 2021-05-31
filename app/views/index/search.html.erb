@@ -17,34 +17,42 @@
             <header>
               <h2>搜尋您附近的失竊案件</h2>
             </header>
-
-
             <%= render partial: "searchbar" %>
 
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">日期</th>
-                  <th scope="col">時間</th>
-                  <th scope="col">地點</th>
-                </tr>
-              </thead>
-              <tbody>
+            <% if @data != [] %>
 
-                <% @data.each do |p| %>
-                <tr>
-                  <td><%= p.date %></td>
-                  <td><%= p.time %></td>
-                  <td><%= p.location %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+              <div class="alert alert-warning" role="alert" style="font-weight:1000;radius:900px;">
+                <%=  "以下是 %s_%02d 在 台北市%s 的 %s 事件" % [params[:year],params[:month],params[:district],params[:type]] %>
+              </div>
 
-            <ul class="pagination justify-content-center">
-              <%= paginate @data , :params => { :anchor => 'search' } , :remote => true %>
-            </ul>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">日期</th>
+                    <th scope="col">時間</th>
+                    <th scope="col">地點</th>
+                  </tr>
+                </thead>
+                <tbody>
 
+                  <% @data.each do |p| %>
+                  <tr>
+                    <td><%= p.date %></td>
+                    <td><%= p.time %></td>
+                    <td><%= p.location %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+
+              <ul class="pagination justify-content-center">
+                <%= paginate @data , :params => { :anchor => 'search' } , :remote => true %>
+              </ul>
+            <% else %>
+              <script type="text/javascript">
+                $('.alert').alert("很抱歉查無資料" );
+              </script>
+            <% end %>
 
 
           </article>
