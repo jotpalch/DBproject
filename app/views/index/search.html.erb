@@ -22,7 +22,7 @@
             <% if @data != [] %>
 
               <div class="alert alert-warning" role="alert" style="font-weight:1000;radius:900px;">
-                <%=  "以下是 %s_%02d 在 台北市%s 的 %s 事件" % [params[:year],params[:month],params[:district],params[:type]] %>
+                <%=  "以下為 [ %s%s ]  在 [台北市%s] 的 [%s] 事件(共%d筆資料)" % [params[:year],params[:month],params[:district],params[:type],@count] %>
               </div>
 
               <table class="table table-striped">
@@ -50,7 +50,7 @@
               </ul>
             <% else %>
               <script type="text/javascript">
-                $('.alert').alert("很抱歉查無資料" );
+                alert("很抱歉查無資料 請重新查詢" );
               </script>
             <% end %>
 
