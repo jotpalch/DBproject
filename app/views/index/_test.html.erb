@@ -1,52 +1,97 @@
-
-<%= form_for :test do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
-
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
-
-  <%= :test.to_param %>
-
-<% end %>
-
-<%= form_tag bike_stoles_path, method: :get do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
-<% end %>
-
-<%= form_tag bike_stoles_path, method: :get do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Enter Text..." %>
-    <%= submit_tag "Search", name: nil %>
-<% end %>
-
-  <% form_for :bike_stoles  do |f| %>
-    <div class="field">
-      <% f.label :name %><br>
-      <% f.text_field :name %>
+<!-- <html>
+  <head>
+    <script type="text/javascript" src="http://api.map.com.tw/js/getAPI.asp?v=1&key=B210B585DD5513C365C4CE89411B51E39C4A10B1"></script>
+    <script type="text/javascript">
+	var map;
+      function init() {
+		map = new iMap(document.getElementById("MapLayer"));
+		map.centerMap(new Point(121.57,25.08),7);
+      }
+    </script>
+  </head>
+  <body onLoad="init()">
+    <div id="MapLayer" style="width: 1000px; height: 1000px; border:1px solid blue;">
     </div>
+  </body>
+</html> -->
 
-    <div class="actions">
-      <% f.submit %>
-    </div>
-  <% end%>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>取得地址座標</title>
 
-  <form action="/search" method="get" id="sb">
-    <input type="text" name="123" value="123">
-    <input type="submit" class="btn btn-dark" value="搜尋">
-  </form>
+    <script type="text/javascript" src="http://api.map.com.tw/js/getAPI.asp?v=1&key=abc"></script>
+    <script type="text/javascript" src="http://api.map.com.tw/js/getAPI.asp?v=1&key=B210B585DD5513C365C4CE89411B51E39C4A10B1"></script>
+    <script type="text/javascript" src="http://api.map.com.tw/js/iset2.js?v=L1"></script>
+    <script type="text/javascript" src="http://api.map.com.tw/js/NotApply1.js"></script>
 
-  <select class="form-select" aria-label="type" name="type" id="type" form="sb">
-    <option selected>類型</option>
-    <option value="1">自行車竊盜</option>
-    <option value="2">機車竊盜</option>
-    <option value="3">汽車竊盜</option>
-    <option value="4">住宅竊盜</option>
-  </select>
+
+    <style>
+         /* 地圖高度設定 */
+        #MapLayer {
+            height: 40%;
+        }
+         /* 頁面滿版設定 */
+        html,
+        body {
+            height: 70%;
+            margin: 0;
+            padding: 0;
+        }
+        /* 範例功能版面 */
+        #tool {
+            position: absolute;
+            z-index: 99;
+            top: 10px;
+            right: 10px;
+            background-color: #f3f3f3;
+            padding: 10px;
+            border: solid;
+            border-width: 1px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var map;
+        function init() {
+            //初始化地圖
+            map = new iMap(document.getElementById("MapLayer"));
+            map.centerMap(new Point(121.57, 25.08), 7);
+        }
+        function getEnterAddr() {
+            var Enteraddr = document.getElementById("Address").value.trim();
+            if (Enteraddr == "")
+            {
+                alert("請輸入地址!");
+                return false;
+            }
+            //地址轉座標服務
+            getAddrXY2("" + Enteraddr + "", funB);
+        }
+        function funB(obj) {
+            var x = obj.locate.lng; //x座標
+            var y = obj.locate.lat; //y座標
+            if(x == 0 || y == 0){
+                alert("未取得座標");
+            }else{
+                alert("取得地址座標:(" + y + "," + x + ")");
+                //添增Marker
+                map.centerMap(new Point(x, y), 10);
+                map.addOverlay(new Marker(new Point(x, y), "TestMark", "", "http://api.map.com.tw/sample/images/redCenter.gif", "Position1"));
+            }
+		}
+    </script>
+
+</head>
+<body onload="init()">
+
+    <div id="MapLayer"></div>
+    <form id="tool">
+        <p>輸入地址: <input id="Address" type="text" style="width:200px;" value="新北市中和區中正路716號"> <input type="button" value="地址定位" onclick="getEnterAddr()"></p>
+    </form>
+
+</body>
+
+
+</html>
