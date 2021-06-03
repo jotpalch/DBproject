@@ -2,11 +2,13 @@ class IndexController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @ps = PsAddr.first(3)
+    Geocoder.configure(lookup: :google, api_key: "AIzaSyBc8zmz3YQWK0t6hCBRCVamuepPjLfcVPk")
+    # results = Geocoder.search("臺北市中山區中山北路二段1號")
+    # p(results.first.coordinates)
+    @ps = PsAddr.last
     @hash = Gmaps4rails.build_markers(@ps) do |ps, marker|
-        s = (ps.name).encode('utf-8')
-        results = Geocoder.search(s)
-        p(results.to_xml)
+        results = Geocoder.search(ps.poi_addr)
+        sleep(0.5)
         next if results.first.nil?
         marker.lat results.first.coordinates[0]
         marker.lng results.first.coordinates[1]
