@@ -6,6 +6,8 @@ ruby '2.7.2'
 gem 'utf8-cleaner'
 gem 'rails_db', '2.3.1'
 gem 'kaminari'
+gem 'geocoder'
+gem 'gmaps4rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
