@@ -3,8 +3,10 @@ class IndexController < ApplicationController
 
   def index
     Geocoder.configure(lookup: :google, api_key: "AIzaSyBc8zmz3YQWK0t6hCBRCVamuepPjLfcVPk")
-    # results = Geocoder.search("臺北市中山區中山北路二段1號")
+
+    # results = Geocoder.search("臺北市萬華區糖?里大理街159巷1~30號")
     # p(results.first.coordinates)
+
     @ps = PsAddr.last
     @hash = Gmaps4rails.build_markers(@ps) do |ps, marker|
         results = Geocoder.search(ps.poi_addr)
@@ -19,7 +21,7 @@ class IndexController < ApplicationController
                      :height  => 40
                  })
     end
-    # @hash = [{:lat=>25.03368625, :lng=>121.56481033101315, :infowindow=>"1"}, {:lat=>25.0375198, :lng=>121.5636796, :infowindow=>"123"}, {:lat=>23.3332726, :lng=>121.3162746, :infowindow=>"111"}]
+
   end
 
   def search

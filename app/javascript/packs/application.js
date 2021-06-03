@@ -6,7 +6,7 @@
 //= geocoder
 //= require underscore
 //= require gmaps/google
-//= require bootstrap
+
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
