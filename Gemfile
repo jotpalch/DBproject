@@ -8,6 +8,7 @@ gem 'rails_db', '2.3.1'
 gem 'kaminari'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'geokit'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
