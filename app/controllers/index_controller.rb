@@ -1,22 +1,30 @@
 class IndexController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+
+
   def index
     Geocoder.configure(lookup: :google, api_key: "AIzaSyBc8zmz3YQWK0t6hCBRCVamuepPjLfcVPk")
 
     # results = Geocoder.search("臺北市萬華區糖?里大理街159巷1~30號")
     # p(results.first.coordinates)
 
-    @ps = PsAddr.last
-    @hash = Gmaps4rails.build_markers(@ps) do |ps, marker|
-        results = Geocoder.search(ps.poi_addr)
-        sleep(0.5)
-        next if results.first.nil?
-        marker.lat results.first.coordinates[0]
-        marker.lng results.first.coordinates[1]
-        marker.infowindow ps.name
+    #台北市端點
+    ####################################
+    n = [25.210872, 121.559511]
+    s = [24.960526, 121.597278]
+    e = [25.029813, 121.665705]
+    w = [25.109088, 121.456927]
+    ####################################
+
+    @cctvcoor = CctvCoor.all.where(" lat<#{n[0]} and lat>#{s[0]} and lng>#{w[1]} and lng<#{e[1]} ")
+    @hash = Gmaps4rails.build_markers(@cctvcoor) do |ps, marker|
+        # Cctv.where(no: ps.no).first.addr
+        marker.lat ps.lat
+        marker.lng ps.lng
+        marker.infowindow ps.no
         marker.picture({
-                     :url =>"/images/cctv_w.png",
+                     :url =>"/images/cctv_#{ps.dir}.png",
                      :width   => 40,
                      :height  => 40
                  })

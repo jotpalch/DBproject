@@ -1,0 +1,2 @@
+class CctvCoor < ApplicationRecord
+end
