@@ -1,6 +1,6 @@
 <form class="row" method="get" action='/map' >
   <span class="btn btn-group"  >
-    <input type="text" name="q" value=<%= params[:q].nil? ? "台北市" : params[:q]%> >
+    <input type="text" name="q" value=<%= @qtext %> >
     <input type="submit" class="btn btn-dark" value="搜尋">
   </span>
 </form>

@@ -22,7 +22,7 @@
         <!-- map -->
           <article id="work" class="panel">
             <header>
-              <h2>地址查詢監視器位置</h2>
+              <h2>地址查詢附近監視器位置</h2>
             </header>
             <section>
 
@@ -50,6 +50,34 @@
 
               </script>
             </section>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>搜尋紀錄</th>
+                  <th>Lat</th>
+                  <th>Lng</th>
+                  <th>時間</th>
+                  <th colspan="4"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @histories.each do |history| %>
+                  <tr>
+                    <td><%= history.q %></td>
+                    <td><%= history.lat %></td>
+                    <td><%= history.lng %></td>
+                    <td><%= history.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+                    <td>
+                      <a href= <%= "/history/#{history.id}" %>  class="icon solid fa-times" style="color: red;"></a>
+                      </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+
           </article>
 
 

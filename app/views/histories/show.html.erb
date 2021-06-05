@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Q:</strong>
+  <%= @history.q %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @history.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @history.lng %>
+</p>
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', "/index#work" %>
