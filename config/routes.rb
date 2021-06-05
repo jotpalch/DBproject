@@ -3,10 +3,8 @@ Rails.application.routes.draw do
   root to: 'index#index'
   get '/index' , to: 'index#index'
   get '/search' => 'index#search'
-
+  get '/map' => 'index#map'
   get '/test' => "index#test"
-
-  resources :bike_stoles
   post '/search' => "index#search"
 
 end

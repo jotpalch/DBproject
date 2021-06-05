@@ -17,3 +17,17 @@ Cctv.all.each do |i|
     dir: d
   )
 end
+
+
+Geocoder.configure(lookup: :google, api_key: "AIzaSyBc8zmz3YQWK0t6hCBRCVamuepPjLfcVPk")
+PsAddr.all.each do |i|
+  results = Geocoder.search(i.display_addr).first
+  next if results.nil?
+  results = results.coordinates
+
+  PsCoor.create(
+    no:  i.id,
+    lat: results[0].to_f,
+    lng: results[1].to_f,
+  )
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_222856) do
+ActiveRecord::Schema.define(version: 2021_06_04_231807) do
 
   create_table "bike_stoles", force: :cascade do |t|
     t.string "no"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 2021_06_03_222856) do
     t.string "traffic_information"
     t.string "display_addr"
     t.string "poi_addr"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ps_coors", force: :cascade do |t|
+    t.string "no"
+    t.float "lat"
+    t.float "lng"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

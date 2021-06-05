@@ -1,0 +1,2 @@
+class PsCoor < ApplicationRecord
+end
