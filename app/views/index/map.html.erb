@@ -68,7 +68,7 @@
                     <td><%= history.q %></td>
                     <td><%= history.lat %></td>
                     <td><%= history.lng %></td>
-                    <td><%= history.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+                    <td><%= (history.created_at+8.hour).strftime("%Y-%m-%d %H:%M") %></td>
                     <td>
                       <a href= <%= "/history/#{history.id}" %>  class="icon solid fa-times" style="color: red;"></a>
                       </td>
