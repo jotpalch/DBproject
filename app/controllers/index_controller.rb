@@ -63,8 +63,8 @@ class IndexController < ApplicationController
                  }
       };
     end
-    # p(@hash)
-    p(@chart[3])
+    p(@hash)
+
   end
 
 
