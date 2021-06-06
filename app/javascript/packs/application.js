@@ -7,7 +7,8 @@
 //= geocoder
 //= require underscore
 //= require gmaps/google
-
+//= require Chart.bundle
+//= require chartkick
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
@@ -17,3 +18,7 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import "chartkick/chart.js"
+require("chartkick")
+require("chart.js")

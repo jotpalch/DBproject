@@ -23,12 +23,35 @@ class IndexController < ApplicationController
     #                  :height  => 40
     #              })
     # end
+    @chart = []
+    @name = ["腳踏車失竊案件數量","汽車失竊案件數量","機車失竊案件數量","住宅失竊案件數量"]
+    tmp = Hash.new
+    BikeStole.select("substr(date,1,3) as d,count(*) as n").group("d").order("d").each do |s|
+      tmp[(s.d.to_i+1911).to_s] = s.n
+    end
+    @chart << tmp
+    tmp = Hash.new
+    CarStole.select("substr(date,1,3) as d,count(*) as n").group("d").order("d").each do |s|
+      tmp[(s.d.to_i+1911).to_s] = s.n
+    end
+    @chart << tmp
+    tmp = Hash.new
+    ScooterStole.select("substr(date,1,3) as d,count(*) as n").group("d").order("d").each do |s|
+      tmp[(s.d.to_i+1911).to_s] = s.n
+    end
+    @chart << tmp
+    tmp = Hash.new
+    HomeStole.select("substr(date,1,3) as d,count(*) as n").group("d").order("d").each do |s|
+      tmp[(s.d.to_i+1911).to_s] = s.n
+    end
+    @chart << tmp
 
 
     @qtext = "台北市"
     @hash = []
     PsCoor.all.each do |ps|
       info = PsAddr.where("id = #{ps.no}").first
+      next if (ps.lat<24 && ps.lat>26 && ps.lng<120 && ps.lng>130)
       @hash << {
         :lat => ps.lat,
         :lng => ps.lng,
@@ -39,8 +62,9 @@ class IndexController < ApplicationController
                      :height  => 27
                  }
       };
-
     end
+    # p(@hash)
+    p(@chart[3])
   end
 
 
@@ -174,9 +198,47 @@ class IndexController < ApplicationController
     #                  :height  => 27
     #              })
     # end
-
-
   end
+
+
+  def chart
+
+    if params[:month]!="整年"
+      params[:month] = "_"+format("%02d",params[:month]).to_s
+      date_search = (params[:year].to_i-1911).to_s+params[:month][1..2]
+    else
+      date_search = (params[:year].to_i-1911).to_s
+    end
+
+
+
+
+
+    @chart = []
+    @name = ["腳踏車失竊案件數量","汽車失竊案件數量","機車失竊案件數量","住宅失竊案件數量"]
+    tmp = Hash.new
+    BikeStole.where("date LIKE '#{date_search}%'").select("substr(location,4,3) as d,count(*) as n").group("d").order("n desc").each do |s|
+      tmp[s.d] = s.n
+    end
+    @chart << tmp
+    tmp = Hash.new
+    CarStole.where("date LIKE '#{date_search}%'").select("substr(location,4,3)  as d,count(*) as n").group("d").order("n desc").each do |s|
+      tmp[s.d] = s.n
+    end
+    @chart << tmp
+    tmp = Hash.new
+    ScooterStole.where("date LIKE '#{date_search}%'").select("substr(location,4,3)  as d,count(*) as n").group("d").order("n desc").each do |s|
+      tmp[s.d] = s.n
+    end
+    @chart << tmp
+    tmp = Hash.new
+    HomeStole.where("date LIKE '#{date_search}%'").select("substr(location,4,3)  as d,count(*) as n").group("d").order("n desc").each do |s|
+      tmp[s.d] = s.n
+    end
+    @chart << tmp
+    p(@chart[3])
+  end
+
 
 
   def delete
@@ -189,9 +251,9 @@ class IndexController < ApplicationController
   end
 
   def test
-    @bikestole = BikeStole.all
+    @bikestole = ScooterStole.select("substr(location,4,3) as d,count(*) as n").group("d").order("n desc")
     p(params)
-    render partial: "mapbar"
+    render partial: "test"
   end
 
 end

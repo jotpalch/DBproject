@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/index' , to: 'index#index'
   get '/search' => 'index#search'
   get '/map' => 'index#map'
+  get '/chart' => 'index#chart'
   get '/test' => "index#test"
   get '/history/:id' => "index#delete"
   post '/search' => "index#search"

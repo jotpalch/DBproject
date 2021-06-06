@@ -3,6 +3,8 @@
 <script src='//cdn.jsdelivr.net/gmaps4rails/2.1.2/gmaps4rails.js'> </script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'> </script>
 <script src='http://underscorejs.org/underscore-esm-min.js'> </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@2.9.1/dist/Chart.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.1/dist/Chart.min.js"></script>
 
 		<!-- Wrapper-->
 			<div id="wrapper">
@@ -12,7 +14,7 @@
 						<a href="/index" class="icon solid fa-home"><span>Home</span></a>
 						<a href="#work" class="icon solid fa-map"><span>Map</span></a>
 						<a href="#search" class="icon solid fa-search"><span>Search</span></a>
-						<a href="https://police.gov.taipei/Default.aspx" class="icon solid fa-globe"><span>Url</span></a>
+						<a href="#chart" class="icon solid fa-list-ol"><span>Charts</span></a>
 					</nav>
 
 				<!-- Main -->
@@ -70,10 +72,58 @@
 									<h2>搜尋您附近的失竊案件</h2>
 								</header>
 
-
 								<%= render partial: "searchbar" %>
 
+							</article>
 
+							<!-- chart -->
+							<article id="chart" class="panel">
+								<header>
+									<h2>圖表</h2>
+								</header>
+
+								<%= render partial: "chartbar" %>
+
+								<% 0.upto(3) do |i| %>
+
+								<div class="container">
+										<h3><%= @name[i] %></h3>
+								    <canvas id=<%=@name[i]%> width="500" height="200" data-labels="<%= @chart[i].keys %>" data-data="<%= @chart[i].values %> "</canvas>
+										<br>
+								</div>
+
+								<script type='text/javascript'>
+								var ctx = document.getElementById('<%=@name[i]%>');
+								var myChart = new Chart(ctx, {
+								  type: 'line',
+								  data: {
+								    labels: JSON.parse(ctx.dataset.labels),
+								    datasets: [{
+								      label: " <%=@name[i]%> ",
+											fill: false,
+								      data: JSON.parse(ctx.dataset.data),
+											backgroundColor: 'rgb(200, 99, 50)',
+    								  borderColor: 'rgb(180, 99, 50)',
+											tension: 0.05,
+								      borderWidth: 2
+								    }]
+								  },
+								  options: {
+								    scales: {
+											y: { // defining min and max so hiding the dataset does not change scale range
+									        min: 0,
+									        max: 1000
+									      },
+								      yAxes: [{
+								        ticks: {
+								          beginAtZero: true
+								        }
+								      }]
+								    }
+								  }
+								});
+								</script>
+								<% end %>
 
 							</article>
 
