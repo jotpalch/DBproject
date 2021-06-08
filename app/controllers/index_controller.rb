@@ -63,7 +63,6 @@ class IndexController < ApplicationController
                  }
       };
     end
-    p(@hash)
 
   end
 
@@ -236,7 +235,7 @@ class IndexController < ApplicationController
       tmp[s.d] = s.n
     end
     @chart << tmp
-    p(@chart[3])
+
   end
 
 
